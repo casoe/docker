@@ -1,4 +1,10 @@
 #!/bin/bash
 
-docker run -d  --name watchtower -v /var/run/docker.sock:/var/run/docker.sock --restart unless-stopped talmai/rpi-watchtower 7 --cleanup --interval 86400
-
+docker run -d \
+  --name watchtower \
+  --restart unless-stopped \
+  -e TZ=Europe/Berlin \
+  -e WATCHTOWER_CLEANUP=true \
+  -e WATCHTOWER_POLL_INTERVAL=86400  \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  containrrr/watchtower
