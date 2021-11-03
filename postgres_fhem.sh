@@ -3,15 +3,21 @@
 SCRIPT="postgres_fhem"
 USER="fhem"
 
-mkdir -p ~/docker/data/$SCRIPT
+# Check if pgdata volume exists
+if [ ! "$(docker volume ls -q -f name=pgdata)" ]; then
+    # If not create one
+    echo Create docker volume
+    docker volume create pgdata
+fi
+
 docker run -d \
   --name=postgres \
   --restart=always \
   -p 5432:5432 \
-  -v ~/docker/$SCRIPT/data:/var/lib/postgresql/data \
+  -v pgdata:/var/lib/postgresql/data \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD=$USER \
   -e POSTGRES_DB=$USER \
-  postgres:13 \
+  postgres:13-bullseye \
   -c shared_buffers=256MB \
   -c effective_cache_size=512MB
