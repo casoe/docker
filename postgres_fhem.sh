@@ -12,6 +12,6 @@ docker run -d \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD=$USER \
   -e POSTGRES_DB=$USER \
-  postgres:14-alpine \
+  postgres:13 \
   -c shared_buffers=256MB \
   -c effective_cache_size=512MB
