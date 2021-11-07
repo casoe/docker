@@ -1,6 +1,5 @@
 #!/bin/bash
 
-SCRIPT="postgres_fhem"
 USER="fhem"
 
 # Check if pgdata volume exists
