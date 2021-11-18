@@ -17,7 +17,7 @@ docker run -d \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD=$USER \
   -e POSTGRES_DB=$USER \
-  --health-cmd "pg_isready -U fhem" \
+  --health-cmd "pg_isready -U $USER" \
   --health-interval 5s \
   --health-retries 10 \
   --health-start-period 10s \
