@@ -17,6 +17,11 @@ docker run -d \
   -e POSTGRES_USER=$USER \
   -e POSTGRES_PASSWORD=$USER \
   -e POSTGRES_DB=$USER \
+  --health-cmd "pg_isready -U fhem" \
+  --health-interval 5s \
+  --health-retries 10 \
+  --health-start-period 10s \
+  --health-timeout 2s \
   postgres:13-bullseye \
   -c shared_buffers=256MB \
   -c effective_cache_size=512MB
