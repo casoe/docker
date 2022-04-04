@@ -8,6 +8,5 @@ docker run -d  \
   -e PGID=1000 \
   -e TZ=Europe/Berlin \
   -p 8080:80 \
-  -p 8443:443 \
   -v ~/docker/data/heimdall:/config \
   ghcr.io/linuxserver/heimdall
