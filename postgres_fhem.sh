@@ -25,3 +25,6 @@ docker run -d \
   postgres:13-bullseye \
   -c shared_buffers=256MB \
   -c effective_cache_size=512MB
+
+echo Dump restotre wit:
+echo docker exec -i postgres pg_restore -v -c -Fc -U fhem -d fhem < db_backup.sqlc
