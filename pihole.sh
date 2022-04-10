@@ -40,3 +40,9 @@ for i in $(seq 1 20); do
         exit 1
     fi
 done;
+
+echo To remove password:
+echo docker exec -it pihole /bin/bash
+echo and then:
+echo sudo pihole -a -p
+
