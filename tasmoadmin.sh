@@ -6,5 +6,4 @@ docker run -d \
   --restart=always \
   -p 5555:80 \
   -v ~/docker/data/tasmoadmin:/data \
-  raymondmm/tasmoadmin:beta
-
+  ghcr.io/tasmoadmin/tasmoadmin:latest
