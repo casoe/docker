@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p ~/docker/data/tasmoadmin:
+mkdir -p ~/docker/data/tasmoadmin
 docker run -d \
   --name=tasmoadmin \
   --restart=always \
