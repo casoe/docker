@@ -20,3 +20,6 @@ docker run -d \
   --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
   --restart unless-stopped \
   linuxserver/wireguard
+
+echo Show peer configuration with:
+echo docker exec -it wireguard /app/show-peer phone
