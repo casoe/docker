@@ -11,7 +11,7 @@ docker run -d \
   -e TZ=Europe/Berlin \
   -e SERVERURL=04o4qb4eomwx9rxx.myfritz.net \
   -e SERVERPORT=51820 \
-  -e PEERS=phone \
+  -e PEERS=phone,tablet,laptop \
   -e PEERDNS=auto \
   -e INTERNAL_SUBNET=10.13.13.0 \
   -p 51820:51820/udp \
