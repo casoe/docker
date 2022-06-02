@@ -1,20 +1,22 @@
 #!/bin/bash
-
 # https://github.com/pi-hole/docker-pi-hole/blob/master/README.md
 
-mkdir -p ~/docker/data/pihole
-cd  ~/docker/data/pihole
+if [ ! -d "~/docker/data/pihole" ]; then
+  git clone git@github.com:pi-hole/docker-pi-hole.git ~/docker/data/pihole
+  cd  ~/docker/data/pihole
+else
+  cd  ~/docker/data/pihole
+  git pull
+fi
 
 MY_IP=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
+MY_HOSTNAME=$(hostname)
 echo My ip address: $MY_IP
 
 echo To remove password:
-echo docker exec -it pihole /bin/bash
-echo and then:
-echo sudo pihole -a -p
+echo docker exec -it pihole pihole -a -p
 
 PIHOLE_BASE="${PIHOLE_BASE:-$(pwd)}"
-[[ -d "$PIHOLE_BASE" ]] || mkdir -p "$PIHOLE_BASE" || { echo "Couldn't create storage directory: $PIHOLE_BASE"; exit 1; }
 
 # Note: ServerIP should be replaced with your external ip.
 docker run -d \
@@ -27,9 +29,9 @@ docker run -d \
     -v "${PIHOLE_BASE}/etc-pihole/:/etc/pihole/" \
     -v "${PIHOLE_BASE}/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
     --dns=$MY_IP --dns=1.1.1.1 \
-    --hostname pi.hole \
-    -e VIRTUAL_HOST="charon" \
-    -e PROXY_LOCATION="charon" \
+    --hostname $MY_HOSTNAME \
+    -e VIRTUAL_HOST=$MY_HOSTNAME \
+    -e PROXY_LOCATION=$MY_HOSTNAME \
     -e ServerIP=$MY_IP \
     pihole/pihole:latest
 
