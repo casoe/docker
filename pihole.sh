@@ -13,9 +13,6 @@ MY_IP=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
 MY_HOSTNAME=$(hostname)
 echo My ip address: $MY_IP
 
-echo To remove password:
-echo docker exec -it pihole pihole -a -p
-
 PIHOLE_BASE="${PIHOLE_BASE:-$(pwd)}"
 
 # Note: ServerIP should be replaced with your external ip.
@@ -51,3 +48,7 @@ for i in $(seq 1 20); do
         exit 1
     fi
 done;
+
+echo "Removing password by"
+echo docker exec pihole /bin/bash -c "echo -ne '\n' | pihole -a -p"
+docker exec pihole /bin/bash -c "echo -ne '\n' | pihole -a -p"
