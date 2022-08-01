@@ -11,7 +11,7 @@ docker run -d \
   -e TZ=Europe/Berlin \
   -e SERVERURL=04o4qb4eomwx9rxx.myfritz.net \
   -e SERVERPORT=51820 \
-  -e PEERS=phone,tablet,laptop \
+  -e PEERS=phone_carsten,tablet_carsten,phone_tina,tablet_tina,laptop_carsten,matthias_raspi \
   -e PEERDNS=auto \
   -e INTERNAL_SUBNET=10.13.13.0 \
   -p 51820:51820/udp \
@@ -22,4 +22,4 @@ docker run -d \
   linuxserver/wireguard
 
 echo Show peer configuration with:
-echo docker exec -it wireguard /app/show-peer phone
+echo docker exec -it wireguard /app/show-peer phone_carsten
