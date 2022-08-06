@@ -9,6 +9,9 @@ else
   git pull
 fi
 
+mkdir -p  ~/docker/data/pihole/etc-pihole/backup
+sudo chown root.root ~/docker/data/pihole/etc-pihole/backup
+
 MY_IP=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
 MY_HOSTNAME=$(hostname)
 echo My ip address: $MY_IP
@@ -52,3 +55,7 @@ done;
 echo "Removing password by"
 echo docker exec pihole /bin/bash -c "echo -ne '\n' | pihole -a -p"
 docker exec pihole /bin/bash -c "echo -ne '\n' | pihole -a -p"
+
+echo
+echo "How to create backup via crontab"
+echo 00 02 * * sat docker exec -it pihole pihole -a teleporter /etc/pihole/backup/pihole-charon-teleporter_$(date -I).tar
